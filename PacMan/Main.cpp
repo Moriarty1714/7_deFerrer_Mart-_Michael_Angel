@@ -1,0 +1,1 @@
+//Lògica general del joc, detecció de inputs, control de frames (GameLoop)
