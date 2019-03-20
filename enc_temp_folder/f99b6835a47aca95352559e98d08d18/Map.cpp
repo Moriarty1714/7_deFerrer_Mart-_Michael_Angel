@@ -17,4 +17,4 @@ int main()
 		myFile.close();
 	}
 	std::cout << number1 << " " << number2;
-} // código que lee el archivo CONFIG.TXT (SE ENCUENTRA DENTRO DE LA CARPETA PACMAN)
+}
