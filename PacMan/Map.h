@@ -8,5 +8,5 @@ struct Map
 
 	Map(); //CONSTRUCTOR del mapa 
 
-	//void mostrarTablero(); //funcion paa mostrar la matriz, a la que le pasamos los parametros de la matriz
+	void mostrarTablero(); //funcion paa mostrar la matriz, a la que le pasamos los parametros de la matriz
 };

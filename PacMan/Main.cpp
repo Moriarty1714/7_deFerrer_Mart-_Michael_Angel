@@ -4,9 +4,9 @@
 int main()
 {
 
-
 	Map tablero;
 
-	//tablero.mostrarTablero();
+	tablero.mostrarTablero();
 
+	return 0;
 }

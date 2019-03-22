@@ -19,21 +19,14 @@ Map::Map()
 
 		tablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
 
-		//for (int i = 0; i < columns; i++)
-		//{
-		//	tablero[i] = new char[columns]; //Rservando memoria para cada Columna
-		//}
-		////la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
-
-
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i <= rows; i++)
 		{
 			tablero[i] = new char[columns]; //Rservando memoria para cada Columna
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
 			myFile.getline(tablero[i], columns + 1);
 		}
 
-		for (int i = 0; i < rows; i++) //NO PONEMOS WHILE, porque ya sabemos el número de fílas y columnas que tenemos que leer
+		for (int i = 0; i <= rows; i++) //NO PONEMOS WHILE, porque ya sabemos el número de fílas y columnas que tenemos que leer
 		{
 			for (int j = 0; j < columns; j++)
 			{
@@ -46,22 +39,7 @@ Map::Map()
 			}
 		}
 
-		//for (int i = 0; i < rows; i++) //NO PONEMOS WHILE, porque ya sabemos el número de fílas y columnas que tenemos que leer
-		//{
-		//	for (int j = 0; j < columns; j++)
-		//	{
-		//			
-		//			myFile >> character;
-		//			tablero[i][j] = character; //En este caso guardamos los elementos en la array bidimensional dinámica
-		//			//el *(puntero+i) señala a la fila y le añadimos *(....+j) para que señale la columna
-		//			//es lo mismo que decir tablero[i][j]
-		//			std::cout << tablero[i][j];
-		//			if (j == columns -1)
-		//			{
-		//				std::cout << '\n';
-		//			}
-		//	}
-		//}
+	
 		myFile.close();
 	}
 	
@@ -70,15 +48,20 @@ Map::Map()
 
 
 
-//void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos los parametros de la matriz
-//{
-//	for (int i = 0; i < rows; i++)
-//	{
-//		for (int j = 0; j < columns; j++)
-//		{
-//			std::cout << tablero [i][j]; //Esto es lo mismo que decir con punteros
-//			////el *(tablero+i) señala a la fila y le añadimos *(....+j) para que señale la columna
-//		}
-//	}
-//}
+void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos los parametros de la matriz
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			std::cout << tablero [i][j];
+
+			if (j == columns - 1)
+			{
+				std::cout << '\n';
+			}//Esto es lo mismo que decir con punteros
+			////el *(tablero+i) señala a la fila y le añadimos *(....+j) para que señale la columna
+		}
+	}
+}
 
