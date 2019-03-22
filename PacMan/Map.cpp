@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <stdlib.h>
 #include "Map.h"
 
 Map::Map() 
