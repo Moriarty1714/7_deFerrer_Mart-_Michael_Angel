@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include "Map.h"
+#include "Player.h"
 
 Map::Map() 
 {
@@ -24,20 +25,6 @@ Map::Map()
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
 			myFile.getline(tablero[i], columns + 1);
 		}
-
-		for (int i = 0; i <= rows; i++) //NO PONEMOS WHILE, porque ya sabemos el número de fílas y columnas que tenemos que leer
-		{
-			for (int j = 0; j < columns; j++)
-			{
-
-				std::cout << tablero[i][j];
-				if (j == columns-1)
-				{
-					std::cout << '\n';
-				}
-			}
-		}
-
 	
 		myFile.close();
 	}
@@ -49,7 +36,7 @@ Map::Map()
 
 void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos los parametros de la matriz
 {
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i <= rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
@@ -63,4 +50,70 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 		}
 	}
 }
+
+
+//bool checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
+//{
+//	switch (move)
+//	{
+//	case Movement::UP:
+//		player1.positionY++;
+//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		{
+//			player1.setPos(player1.positionX, player1.positionY);
+//			player1.updateScore(1);
+//			return true;
+//		}
+//		else
+//		{
+//			player1.setPos(player1.positionX, player1.positionY--);
+//			return false;
+//		}
+//		break;
+//	case Movement::DOWN:
+//		player1.positionY--;
+//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		{
+//			player1.setPos(player1.positionX, player1.positionY);
+//			player1.updateScore(1);
+//			return true;
+//		}
+//		else
+//		{
+//			player1.setPos(player1.positionX, player1.positionY++);
+//			return false;
+//		}
+//		break;
+//	case Movement::LEFT:
+//		player1.positionX--;
+//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		{
+//			player1.setPos(player1.positionX, player1.positionY);
+//			player1.updateScore(1);
+//			return true;
+//		}
+//		else
+//		{
+//			player1.setPos(player1.positionX++, player1.positionY);
+//			return false;
+//		}
+//		break;
+//	case Movement::RIGHT:
+//		player1.positionX++;
+//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		{
+//			player1.setPos(player1.positionX, player1.positionY);
+//			player1.updateScore(1);
+//			return true;
+//		}
+//		else
+//		{
+//			player1.setPos(player1.positionX--, player1.positionY);
+//			return false;
+//		}
+//		break;
+//	default:
+//		return 0;
+//	}
+//}
 
