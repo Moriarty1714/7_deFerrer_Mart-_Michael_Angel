@@ -8,27 +8,45 @@ int main()
 {
 
 	Map tablero;
+	player player;
 
 	tablero.mostrarTablero();
 
 
-	//INPUT OPCIÓN GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
-	    
-	 //   Movement move;
+	Movement move;
 
-		//Sleep(400);
-		//if (GetAsyncKeyState('W')) {
-		//	move = Movement::UP;
+
+	//INPUT OPCIÓN GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
+	do {
+
+		Sleep(400);
+		if (GetAsyncKeyState('W')) {
+			move = Movement::UP;
+		}
+		else if (GetAsyncKeyState('A')) {
+			move = Movement::LEFT;
+		}
+		else if (GetAsyncKeyState('D')) {
+			move = Movement::RIGHT;
+		}
+		else if (GetAsyncKeyState('S')) {
+			move = Movement::DOWN;
+		}
+
+		//if (tablero.checkMovement(move, player)) {
+		//	//player.printScore(); //CREAR ESTA FUNCIÓN!!!!
+		//	if (tablero.existsCoin(movement, player))
+		//	{
+		//		tablero.movePlayerOnBoard(movement, player);
+		//		player.updateScore();
+		//	}
+		//	else
+		//	{
+		//		tablero.movePlayerOnBoard(movement, player);
+		//	}
 		//}
-		//else if (GetAsyncKeyState('A')) {
-		//	move = Movement::LEFT;
-		//}
-		//else if (GetAsyncKeyState('D')) {
-		//	move = Movement::RIGHT;
-		//}
-		//else if (GetAsyncKeyState('S')) {
-		//	move = Movement::DOWN;
-		//}
+
+	} while (true);
 
 	return 0;
 }
