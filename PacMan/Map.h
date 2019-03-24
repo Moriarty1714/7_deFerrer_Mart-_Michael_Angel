@@ -3,14 +3,16 @@
 #include "Player.h"
 #include <ctime>
 
-//enum class Cell { STONE = '#', COINS = '*', NOTHING = ' ', PLAYER = '<' };
+enum class Cell { STONE = '#', COINS = '*', NOTHING = ' ', PLAYER = '<' };
 
 struct Map
 {
-	//Cell **tablero  ---> PODRÍA SER ASÍ
-	char **tablero; //dos punteros señalan a una matriz!
+	Cell **tablero; // ---> PODRÍA SER ASÍ
+	 //dos punteros señalan a una matriz!
 	int rows;
 	int columns;
+
+
 
 	Map(); //CONSTRUCTOR del mapa 
 

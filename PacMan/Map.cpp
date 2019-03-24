@@ -10,6 +10,7 @@ Map::Map()
 	
 	char character;
 	
+	char **cTablero; //Creo una array dinàmica para guardar el char
 
 	std::ifstream myFile("config.txt");
 	if (myFile.is_open())
@@ -17,18 +18,51 @@ Map::Map()
 		myFile >> rows;
 		myFile >> columns;
 
-		tablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
+		cTablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
 
 		for (int i = 0; i <= rows; i++)
 		{
-			tablero[i] = new char[columns]; //Rservando memoria para cada Columna
+			cTablero[i] = new char[columns]; //Rservando memoria para cada Columna
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
-			myFile.getline(tablero[i], columns + 1);
+			myFile.getline(cTablero[i], columns + 1);
 		}
 	
 		myFile.close();
 	}
+
+	//Convertir los chars en Cell
+	tablero = new Cell *[rows];
+	for (int i = 0; i <= rows; i++)
+	{
+		tablero[i] = new Cell[columns]; //Rservando memoria para cada Columna
+	}
+
+	for (int i = 0; i <= rows; i++)
+	{
+		for (int j = 0; j <= columns; j++)
+		{
+			switch (cTablero[i][j]) {
+			case '#': {
+				tablero[i][j] = Cell::STONE;
+				break;
+			}
+			case '*': {
+				tablero[i][j] = Cell::COINS;
+				break;
+			}
+			case '<': {
+				tablero[i][j] = Cell::PLAYER;
+				break;
+			}
+			default: {
+				tablero[i][j] = Cell::NOTHING;
+				break;
+			}
+			}
+		}
+	}
 	
+
 } // código que lee el archivo CONFIG.TXT (SE ENCUENTRA DENTRO DE LA CARPETA PACMAN)
 
 
@@ -40,7 +74,7 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			std::cout << tablero [i][j];
+			std::cout << (char)tablero [i][j];
 
 			if (j == columns - 1)
 			{

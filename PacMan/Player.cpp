@@ -13,3 +13,4 @@ void player::updateScore(int points) //FUNCIÓN PARA AUMENTAR LA PUTUACIÓN DEL JU
 {
 	score++;
 }
+
