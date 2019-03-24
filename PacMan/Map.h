@@ -3,7 +3,7 @@
 #include "Player.h"
 #include <ctime>
 
-enum class Cell { STONE = '#', COINS = '$', NOTHING = ' ', PLAYER = '@' };
+//enum class Cell { STONE = '#', COINS = '*', NOTHING = ' ', PLAYER = '<' };
 
 struct Map
 {
@@ -16,70 +16,10 @@ struct Map
 
 	void mostrarTablero(); //funcion paa mostrar la matriz, a la que le pasamos los parametros de la matriz
 
-//#pragma region COMPROBAR MOVIMIENTO
-//	bool checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
-//	{
-//		switch (move)
-//		{
-//		case Movement::UP:
-//			player1.positionY++;
-//			if (board[player1.positionX][player1.positionY] != Cell::STONE)
-//			{
-//				player1.setPos(player1.positionX, player1.positionY);
-//				player1.updateScore(1);
-//				return true;
-//			}
-//			else
-//			{
-//				player1.setPos(player1.positionX, player1.positionY--);
-//				return false;
-//			}
-//			break;
-//		case Movement::DOWN:
-//			player1.positionY--;
-//			if (board[player1.positionX][player1.positionY] != Cell::STONE)
-//			{
-//				player1.setPos(player1.positionX, player1.positionY);
-//				player1.updateScore(1);
-//				return true;
-//			}
-//			else
-//			{
-//				player1.setPos(player1.positionX, player1.positionY++);
-//				return false;
-//			}
-//			break;
-//		case Movement::LEFT:
-//			player1.positionX--;
-//			if (board[player1.positionX][player1.positionY] != Cell::STONE)
-//			{
-//				player1.setPos(player1.positionX, player1.positionY);
-//				player1.updateScore(1);
-//				return true;
-//			}
-//			else
-//			{
-//				player1.setPos(player1.positionX++, player1.positionY);
-//				return false;
-//			}
-//			break;
-//		case Movement::RIGHT:
-//			player1.positionX++;
-//			if (board[player1.positionX][player1.positionY] != Cell::STONE)
-//			{
-//				player1.setPos(player1.positionX, player1.positionY);
-//				player1.updateScore(1);
-//				return true;
-//			}
-//			else
-//			{
-//				player1.setPos(player1.positionX--, player1.positionY);
-//				return false;
-//			}
-//			break;
-//		default:
-//			return 0;
-//		}
-//	}
-//#pragma endregion
+
+	//bool checkMovement(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
+	//bool existCoin(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
+	//void setPlayer(player &player1);
+	//void movePlayer(player & player1, Movement newmovement); //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
+
 };

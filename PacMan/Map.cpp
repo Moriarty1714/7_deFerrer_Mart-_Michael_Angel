@@ -51,14 +51,15 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 	}
 }
 
-
-//bool checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
+//LOS NOMBERS DE LAS FUNCIONES DEBERIAN IR AL HEADER
+//#pragma region COMPROBAR MOVIMIENTO
+//bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
 //{
 //	switch (move)
 //	{
 //	case Movement::UP:
 //		player1.positionY++;
-//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		if (tablero[player1.positionX][player1.positionY] != 'X')
 //		{
 //			player1.setPos(player1.positionX, player1.positionY);
 //			player1.updateScore(1);
@@ -72,7 +73,7 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 //		break;
 //	case Movement::DOWN:
 //		player1.positionY--;
-//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		if (tablero[player1.positionX][player1.positionY] != 'X')
 //		{
 //			player1.setPos(player1.positionX, player1.positionY);
 //			player1.updateScore(1);
@@ -86,7 +87,7 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 //		break;
 //	case Movement::LEFT:
 //		player1.positionX--;
-//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		if (tablero[player1.positionX][player1.positionY] != 'X')
 //		{
 //			player1.setPos(player1.positionX, player1.positionY);
 //			player1.updateScore(1);
@@ -100,7 +101,7 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 //		break;
 //	case Movement::RIGHT:
 //		player1.positionX++;
-//		if (board[player1.positionX][player1.positionY] != Cell::STONE)
+//		if (tablero[player1.positionX][player1.positionY] != 'X')
 //		{
 //			player1.setPos(player1.positionX, player1.positionY);
 //			player1.updateScore(1);
@@ -116,4 +117,47 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 //		return 0;
 //	}
 //}
+//#pragma endregion
+//
+//#pragma region CONTAR SI HAY *
+//bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
+//{
+//	switch (move)
+//	{
+//	case Movement::UP:
+//	case Movement::DOWN:
+//	case Movement::LEFT:
+//	case Movement::RIGHT:
+//		if (tablero[player1.positionX][player1.positionY] == '*')
+//		{
+//			return true;
+//		}
+//		else
+//		{
+//			return false;
+//		}
+//		break;
+//	default:
+//		break;
+//	}
+//}
+//#pragma endregion
+//
+//#pragma region COLOCAR AL PLAYER EN EL TABLERO
+//void Map::setPlayer(player &player1)
+//{
+//	player1.positionX = 4; //DETERMINAR DONDE COLOCARLO?
+//	player1.positionY = 5;
+//}
+//#pragma endregion
+//
+//#pragma region MOVER PLAYER
+//void Map::movePlayer(player & player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
+//{
+//	if (checkMovement(player1, newmovement))
+//	{
+//		tablero[player1.positionX][player1.positionY] = '<';
+//	}
+//}
+//#pragma endregion 
 

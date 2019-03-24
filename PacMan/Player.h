@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+
 enum class Movement { UP, DOWN, LEFT, RIGHT }; //ENUM CLASS DEL MOVIMIENTO POSIBLE
 
 struct player
