@@ -10,8 +10,9 @@ int main()
 	Map tablero;
 	player player;
 
+	tablero.setPlayer(player);
 	tablero.mostrarTablero();
-
+	
 
 	Movement move;
 

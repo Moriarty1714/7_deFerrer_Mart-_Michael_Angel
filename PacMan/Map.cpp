@@ -5,11 +5,11 @@
 #include "Map.h"
 #include "Player.h"
 
-Map::Map() 
+Map::Map()
 {
-	
+
 	char character;
-	
+
 	char **cTablero; //Creo una array dinàmica para guardar el char
 
 	std::ifstream myFile("config.txt");
@@ -26,44 +26,44 @@ Map::Map()
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
 			myFile.getline(cTablero[i], columns + 1);
 		}
-	
 		myFile.close();
-	}
 
-	//Convertir los chars en Cell
-	tablero = new Cell *[rows];
-	for (int i = 0; i <= rows; i++)
-	{
-		tablero[i] = new Cell[columns]; //Rservando memoria para cada Columna
-	}
-
-	for (int i = 0; i <= rows; i++)
-	{
-		for (int j = 0; j <= columns; j++)
+		//Convertir los chars en Cell
+		tablero = new Cell *[rows];
+		for (int i = 0; i <= rows; i++)
 		{
-			switch (cTablero[i][j]) {
-			case '#': {
-				tablero[i][j] = Cell::STONE;
-				break;
-			}
-			case '*': {
-				tablero[i][j] = Cell::COINS;
-				break;
-			}
-			case '<': {
-				tablero[i][j] = Cell::PLAYER;
-				break;
-			}
-			default: {
-				tablero[i][j] = Cell::NOTHING;
-				break;
-			}
+			tablero[i] = new Cell[columns]; //Rservando memoria para cada Columna
+		}
+
+
+		for (int i = 0; i <= rows; i++)
+		{
+			for (int j = 0; j <= columns; j++)
+			{
+				switch (cTablero[i][j]) {
+				case 'X': {
+					tablero[i][j] = Cell::STONE;
+					break;
+				}
+				case '*': {
+					tablero[i][j] = Cell::COINS;
+					break;
+				}
+				case '<': {
+					tablero[i][j] = Cell::PLAYER;
+					break;
+				}
+				default:
+				{
+					tablero[i][j] = Cell::NOTHING;
+					break;
+				}
+				}
 			}
 		}
-	}
-	
 
-} // código que lee el archivo CONFIG.TXT (SE ENCUENTRA DENTRO DE LA CARPETA PACMAN)
+	}
+}// código que lee el archivo CONFIG.TXT (SE ENCUENTRA DENTRO DE LA CARPETA PACMAN)
 
 
 
@@ -85,73 +85,72 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 	}
 }
 
-//LOS NOMBERS DE LAS FUNCIONES DEBERIAN IR AL HEADER
-//#pragma region COMPROBAR MOVIMIENTO
-//bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
-//{
-//	switch (move)
-//	{
-//	case Movement::UP:
-//		player1.positionY++;
-//		if (tablero[player1.positionX][player1.positionY] != 'X')
-//		{
-//			player1.setPos(player1.positionX, player1.positionY);
-//			player1.updateScore(1);
-//			return true;
-//		}
-//		else
-//		{
-//			player1.setPos(player1.positionX, player1.positionY--);
-//			return false;
-//		}
-//		break;
-//	case Movement::DOWN:
-//		player1.positionY--;
-//		if (tablero[player1.positionX][player1.positionY] != 'X')
-//		{
-//			player1.setPos(player1.positionX, player1.positionY);
-//			player1.updateScore(1);
-//			return true;
-//		}
-//		else
-//		{
-//			player1.setPos(player1.positionX, player1.positionY++);
-//			return false;
-//		}
-//		break;
-//	case Movement::LEFT:
-//		player1.positionX--;
-//		if (tablero[player1.positionX][player1.positionY] != 'X')
-//		{
-//			player1.setPos(player1.positionX, player1.positionY);
-//			player1.updateScore(1);
-//			return true;
-//		}
-//		else
-//		{
-//			player1.setPos(player1.positionX++, player1.positionY);
-//			return false;
-//		}
-//		break;
-//	case Movement::RIGHT:
-//		player1.positionX++;
-//		if (tablero[player1.positionX][player1.positionY] != 'X')
-//		{
-//			player1.setPos(player1.positionX, player1.positionY);
-//			player1.updateScore(1);
-//			return true;
-//		}
-//		else
-//		{
-//			player1.setPos(player1.positionX--, player1.positionY);
-//			return false;
-//		}
-//		break;
-//	default:
-//		return 0;
-//	}
-//}
-//#pragma endregion
+
+bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
+{
+	switch (move)
+	{
+	case Movement::UP:
+		player1.positionY++;
+		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		{
+			player1.setPos(player1.positionX, player1.positionY);
+			player1.updateScore(1);
+			return true;
+		}
+		else
+		{
+			player1.setPos(player1.positionX, player1.positionY--);
+			return false;
+		}
+		break;
+	case Movement::DOWN:
+		player1.positionY--;
+		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		{
+			player1.setPos(player1.positionX, player1.positionY);
+			player1.updateScore(1);
+			return true;
+		}
+		else
+		{
+			player1.setPos(player1.positionX, player1.positionY++);
+			return false;
+		}
+		break;
+	case Movement::LEFT:
+		player1.positionX--;
+		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		{
+			player1.setPos(player1.positionX, player1.positionY);
+			player1.updateScore(1);
+			return true;
+		}
+		else
+		{
+			player1.setPos(player1.positionX++, player1.positionY);
+			return false;
+		}
+		break;
+	case Movement::RIGHT:
+		player1.positionX++;
+		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		{
+			player1.setPos(player1.positionX, player1.positionY);
+			player1.updateScore(1);
+			return true;
+		}
+		else
+		{
+			player1.setPos(player1.positionX--, player1.positionY);
+			return false;
+		}
+		break;
+	default:
+		return 0;
+	}
+}
+
 //
 //#pragma region CONTAR SI HAY *
 //bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
@@ -176,22 +175,21 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 //	}
 //}
 //#pragma endregion
-//
-//#pragma region COLOCAR AL PLAYER EN EL TABLERO
-//void Map::setPlayer(player &player1)
-//{
-//	player1.positionX = 4; //DETERMINAR DONDE COLOCARLO?
-//	player1.positionY = 5;
-//}
-//#pragma endregion
-//
-//#pragma region MOVER PLAYER
-//void Map::movePlayer(player & player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
-//{
-//	if (checkMovement(player1, newmovement))
-//	{
-//		tablero[player1.positionX][player1.positionY] = '<';
-//	}
-//}
-//#pragma endregion 
+
+void Map::setPlayer(player &player1)
+{
+	player1.positionX = 4; //DETERMINAR DONDE COLOCARLO? ES NECESARIO COLOCARLO EN ESTA FUNCION???
+	player1.positionY = 5;
+	tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+}
+
+
+void Map::movePlayer(player & player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
+{
+	if (checkMovement(player1, newmovement))
+	{
+		tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+	}
+}
+
 
