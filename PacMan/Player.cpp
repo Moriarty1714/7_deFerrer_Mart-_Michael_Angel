@@ -9,8 +9,12 @@ void player::setPos(int newpositionX, int newpositionY) //FUNCIÓN PARA PONER LA 
 	positionY = newpositionY;
 }
 
-void player::updateScore(int points) //FUNCIÓN PARA AUMENTAR LA PUTUACIÓN DEL JUGADOR
+void player::updateScore(int points) //FUNCIÓN PARA AUMENTAR LA PUTUACIÓN DEL JUGADOR CON LA PUNTUACION QUE QUERAMOS
 {
-	score++;
+	score = score + points;
 }
 
+void player::printScore()	//Funcion para printar el Score
+{
+	std::cout << score << "\n";
+}

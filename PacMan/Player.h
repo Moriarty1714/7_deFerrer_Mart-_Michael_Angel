@@ -13,4 +13,5 @@ struct player
 
 	void updateScore(int points); //FUNCIÓN PARA AUMENTAR LA PUTUACIÓN DEL JUGADOR
 
+	void printScore();
 };

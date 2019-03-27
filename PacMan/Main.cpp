@@ -19,8 +19,9 @@ int main()
 
 	//INPUT OPCIÓN GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
-
-		Sleep(400);
+		Sleep(100);
+		system("cls");
+		
 		if (GetAsyncKeyState('W')) {
 			move = Movement::UP;
 		}
@@ -33,7 +34,8 @@ int main()
 		else if (GetAsyncKeyState('S')) {
 			move = Movement::DOWN;
 		}
-
+		else {}
+		tablero.mostrarTablero();
 		//if (tablero.checkMovement(move, player)) {
 		//	//player.printScore(); //CREAR ESTA FUNCIÓN!!!!
 		//	if (tablero.existsCoin(movement, player))
