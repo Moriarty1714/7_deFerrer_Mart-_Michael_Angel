@@ -22,27 +22,27 @@ int main()
 		Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
 		system("cls"); //Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
 		
-		if (GetAsyncKeyState('W')) {
+		if (GetAsyncKeyState('D')) {
 			move = Movement::UP;
 		}
-		else if (GetAsyncKeyState('A')) {
+		else if (GetAsyncKeyState('W')) {
 			move = Movement::LEFT;
 		}
-		else if (GetAsyncKeyState('D')) {
+		else if (GetAsyncKeyState('S')) {
 			move = Movement::RIGHT;
 		}
-		else if (GetAsyncKeyState('S')) {
+		else if (GetAsyncKeyState('A')) {
 			move = Movement::DOWN;
 		}
 		else {
 			move = Movement::NOTHING;
 		}
-
+		
 		tablero.movePlayer(player, move);
 		player.printScore();
 		tablero.mostrarTablero();
 		//if (tablero.checkMovement(move, player)) {
-		//	//player.printScore(); //CREAR ESTA FUNCI�N!!!!
+		
 		//	if (tablero.existsCoin(movement, player))
 		//	{
 		//		tablero.movePlayerOnBoard(movement, player);

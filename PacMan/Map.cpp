@@ -88,6 +88,7 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 
 bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
 {
+	tablero[player1.positionX][player1.positionY] = Cell::NOTHING;	//Convierte la casilla donde estava en nada
 	switch (move)
 	{
 	case Movement::UP:
@@ -100,7 +101,8 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		}
 		else
 		{
-			player1.setPos(player1.positionX, player1.positionY--);
+			player1.positionY--;
+			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
@@ -114,7 +116,9 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		}
 		else
 		{
-			player1.setPos(player1.positionX, player1.positionY++);
+			player1.positionY++;
+			player1.setPos(player1.positionX, player1.positionY);
+			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
@@ -128,7 +132,9 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		}
 		else
 		{
-			player1.setPos(player1.positionX++, player1.positionY);
+			player1.positionX++;
+			player1.setPos(player1.positionX, player1.positionY);
+			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
@@ -142,12 +148,14 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		}
 		else
 		{
-			player1.setPos(player1.positionX--, player1.positionY);
+			player1.positionX--;
+			player1.setPos(player1.positionX, player1.positionY);
+			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
 	default:
-		return 0;
+		return false;
 	}
 }
 
@@ -184,7 +192,7 @@ void Map::setPlayer(player &player1)
 }
 
 
-void Map::movePlayer(player & player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
+void Map::movePlayer(player &player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
 {
 	if (newmovement==Movement::NOTHING){}
 	
