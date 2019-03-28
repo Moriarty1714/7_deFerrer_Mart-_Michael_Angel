@@ -1,4 +1,4 @@
-//Lògica general del joc, detecció de inputs, control de frames (GameLoop)
+//Lï¿½gica general del joc, detecciï¿½ de inputs, control de frames (GameLoop)
 #include "Map.h"
 #include "Player.h"
 #include <Windows.h>
@@ -17,7 +17,7 @@ int main()
 	Movement move;
 
 
-	//INPUT OPCIÓN GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
+	//INPUT OPCIï¿½N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
 		Sleep(100);
 		system("cls");
@@ -37,7 +37,7 @@ int main()
 		else {}
 		tablero.mostrarTablero();
 		//if (tablero.checkMovement(move, player)) {
-		//	//player.printScore(); //CREAR ESTA FUNCIÓN!!!!
+		//	//player.printScore(); //CREAR ESTA FUNCIï¿½N!!!!
 		//	if (tablero.existsCoin(movement, player))
 		//	{
 		//		tablero.movePlayerOnBoard(movement, player);
