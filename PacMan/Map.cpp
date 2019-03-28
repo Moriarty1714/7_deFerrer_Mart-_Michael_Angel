@@ -186,10 +186,15 @@ void Map::setPlayer(player &player1)
 
 void Map::movePlayer(player & player1, Movement newmovement) //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
 {
-	if (checkMovement(player1, newmovement))
-	{
-		tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+	if (newmovement==Movement::NOTHING){}
+	
+	else {
+		if (checkMovement(player1, newmovement))
+		{
+			tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+		}
 	}
+	
 }
 
 

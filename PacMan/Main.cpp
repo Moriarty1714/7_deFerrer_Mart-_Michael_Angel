@@ -19,8 +19,8 @@ int main()
 
 	//INPUT OPCI�N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
-		Sleep(100);
-		system("cls");
+		Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
+		system("cls"); //Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
 		
 		if (GetAsyncKeyState('W')) {
 			move = Movement::UP;
@@ -34,7 +34,12 @@ int main()
 		else if (GetAsyncKeyState('S')) {
 			move = Movement::DOWN;
 		}
-		else {}
+		else {
+			move = Movement::NOTHING;
+		}
+
+		tablero.movePlayer(player, move);
+		player.printScore();
 		tablero.mostrarTablero();
 		//if (tablero.checkMovement(move, player)) {
 		//	//player.printScore(); //CREAR ESTA FUNCI�N!!!!
