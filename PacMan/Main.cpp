@@ -41,18 +41,6 @@ int main()
 		tablero.movePlayer(player, move);
 		player.printScore();
 		tablero.mostrarTablero();
-		//if (tablero.checkMovement(move, player)) {
-		
-		//	if (tablero.existsCoin(movement, player))
-		//	{
-		//		tablero.movePlayerOnBoard(movement, player);
-		//		player.updateScore();
-		//	}
-		//	else
-		//	{
-		//		tablero.movePlayerOnBoard(movement, player);
-		//	}
-		//}
 
 	} while (true);
 

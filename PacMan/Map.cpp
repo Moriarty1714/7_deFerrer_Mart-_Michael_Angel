@@ -96,7 +96,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			player1.setPos(player1.positionX, player1.positionY);
-			player1.updateScore(1);
+			existCoin(player1, move)? player1.updateScore(1): player1.updateScore(0);
 			return true;
 		}
 		else
@@ -111,7 +111,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			player1.setPos(player1.positionX, player1.positionY);
-			player1.updateScore(1);
+			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
 		}
 		else
@@ -127,7 +127,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			player1.setPos(player1.positionX, player1.positionY);
-			player1.updateScore(1);
+			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
 		}
 		else
@@ -143,7 +143,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			player1.setPos(player1.positionX, player1.positionY);
-			player1.updateScore(1);
+			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
 		}
 		else
@@ -159,30 +159,28 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 	}
 }
 
-//
-//#pragma region CONTAR SI HAY *
-//bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
-//{
-//	switch (move)
-//	{
-//	case Movement::UP:
-//	case Movement::DOWN:
-//	case Movement::LEFT:
-//	case Movement::RIGHT:
-//		if (tablero[player1.positionX][player1.positionY] == '*')
-//		{
-//			return true;
-//		}
-//		else
-//		{
-//			return false;
-//		}
-//		break;
-//	default:
-//		break;
-//	}
-//}
-//#pragma endregion
+//CONTAR SI HAY * para sumar puntuación
+bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
+{
+	switch (move)
+	{
+	case Movement::UP:
+	case Movement::DOWN:
+	case Movement::LEFT:
+	case Movement::RIGHT:
+		if (tablero[player1.positionX][player1.positionY] == Cell::COINS)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		break;
+	default:
+		break;
+	}
+}
 
 void Map::setPlayer(player &player1)
 {

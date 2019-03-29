@@ -20,7 +20,7 @@ struct Map
 
 
 	bool checkMovement(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
-	//bool existCoin(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
+	bool existCoin(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
 	void setPlayer(player &player1);
 	void movePlayer(player & player1, Movement newmovement); //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
 
