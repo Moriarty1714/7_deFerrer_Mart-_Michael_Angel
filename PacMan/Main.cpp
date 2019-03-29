@@ -11,10 +11,8 @@ int main()
 	player player;
 
 	tablero.setPlayer(player);
-	tablero.mostrarTablero();
 	
-
-	Movement move = Movement::NOTHING;;
+	Movement move = Movement::NOTHING;; //Inicialmente estamos quietos
 	
 	//INPUT OPCI�N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
