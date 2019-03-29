@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
 #include "Player.h"
+#include "Types.h"
 #include <ctime>
 
-enum class Cell { STONE = 'X', COINS = '*', NOTHING = ' ', PLAYER = '<' };
 
 struct Map
 {

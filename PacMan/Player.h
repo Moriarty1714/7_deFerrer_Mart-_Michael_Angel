@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
+#include "Types.h"
 
-enum class Movement { UP, DOWN, LEFT, RIGHT, NOTHING }; //ENUM CLASS DEL MOVIMIENTO POSIBLE
 
 struct player
 {

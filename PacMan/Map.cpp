@@ -104,7 +104,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 	tablero[player1.positionX][player1.positionY] = Cell::NOTHING;	//Convierte la casilla donde estava en nada
 	switch (move)
 	{
-	case Movement::UP:
+	case Movement::RIGHT:
 		player1.positionY++;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
@@ -123,11 +123,11 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 			return false;
 		}
 		break;
-	case Movement::DOWN:
+	case Movement::LEFT:
 		player1.positionY--;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
-			if (player1.positionY < 1)
+			if (player1.positionY < 0)
 			{
 				player1.positionY = columns;
 			}
@@ -143,7 +143,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 			return false;
 		}
 		break;
-	case Movement::LEFT:
+	case Movement::UP:
 		player1.positionX--;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
@@ -160,7 +160,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 			return false;
 		}
 		break;
-	case Movement::RIGHT:
+	case Movement::DOWN:
 		player1.positionX++;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
@@ -206,7 +206,7 @@ bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI 
 
 void Map::setPlayer(player &player1)
 {
-	player1.positionX = 4; //DETERMINAR DONDE COLOCARLO? ES NECESARIO COLOCARLO EN ESTA FUNCION???
+	player1.positionX = 4; //DETERMINA POSICION INICIAL PLAYER
 	player1.positionY = 5;
 	tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
 }
