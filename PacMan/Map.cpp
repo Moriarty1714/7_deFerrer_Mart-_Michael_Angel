@@ -78,13 +78,14 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 			if (tablero[i][j]==Cell::STONE) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 17); //Da color a las piedras
 				std::cout << (char)tablero[i][j];
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //Volver al color estándar
 			}
 			else if (tablero[i][j] == Cell::PLAYER) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6); //Da color al jugador
 				std::cout << (char)tablero[i][j];
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //Volver al color estándar
 			}
 			else {
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 				std::cout << (char)tablero[i][j];
 			}
 
