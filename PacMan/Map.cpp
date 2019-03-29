@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Map.h"
 #include "Player.h"
+#include <Windows.h>
 
 Map::Map()
 {
@@ -74,7 +75,18 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			std::cout << (char)tablero [i][j];
+			if (tablero[i][j]==Cell::STONE) {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 17); //Da color a las piedras
+				std::cout << (char)tablero[i][j];
+			}
+			else if (tablero[i][j] == Cell::PLAYER) {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6); //Da color al jugador
+				std::cout << (char)tablero[i][j];
+			}
+			else {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				std::cout << (char)tablero[i][j];
+			}
 
 			if (j == columns - 1)
 			{

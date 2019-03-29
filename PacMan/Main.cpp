@@ -35,8 +35,10 @@ int main()
 		}
 		
 		tablero.movePlayer(player, move);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);//Color estándar
 		player.printScore();
 		tablero.mostrarTablero();
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);//Color estándar
 
 	} while (true);
 
