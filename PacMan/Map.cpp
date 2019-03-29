@@ -126,6 +126,10 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		player1.positionX--;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
+			/*if (player1.positionX < 0)
+			{
+				player1.positionX = rows;
+			}*/
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
@@ -142,6 +146,10 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		player1.positionX++;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
+			/*if (player1.positionX > rows)
+			{
+				player1.positionX = 0;
+			}*/
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
