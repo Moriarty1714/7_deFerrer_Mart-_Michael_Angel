@@ -14,13 +14,12 @@ int main()
 	tablero.mostrarTablero();
 	
 
-	Movement move;
-
-
+	Movement move = Movement::NOTHING;;
+	
 	//INPUT OPCI�N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
 		Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
-		system("cls"); //Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
+		system("cls");//Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
 		
 		if (GetAsyncKeyState('D')) {
 			move = Movement::UP;
@@ -33,9 +32,6 @@ int main()
 		}
 		else if (GetAsyncKeyState('A')) {
 			move = Movement::DOWN;
-		}
-		else {
-			move = Movement::NOTHING;
 		}
 		
 		tablero.movePlayer(player, move);
