@@ -7,16 +7,15 @@
 int main()
 {
 
-	Map tablero;
+	Map board;
 	player player;
 
-	tablero.setPlayer(player);
+	board.setPlayer(player);
 	
 	Movement move = Movement::NOTHING;; //Inicialmente estamos quietos
 	
 	//INPUT OPCI�N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
-		Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
 		system("cls");//Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
 		
 		if (GetAsyncKeyState('D') || GetAsyncKeyState(VK_RIGHT)) //Tecla D y (FLECHA DERECHA TECLADO) mueve el personaje a la derecha
@@ -40,10 +39,15 @@ int main()
 			exit(0);
 		}
 		
-		tablero.movePlayer(player, move);
+		//LÓGICA DEL JUEGO
+		board.movePlayer(player, move);
+
+		//DRAW
 		player.printScore();
-		tablero.mostrarTablero();
+		board.mostrarTablero();
 		
+		//CONTROLADOR DE FRAMES
+		Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
 
 	} while (true);
 

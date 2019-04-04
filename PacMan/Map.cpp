@@ -13,11 +13,15 @@ Map::Map()
 
 	char **cTablero; //Creo una array dinàmica para guardar el char
 
+	char separador;
+
 	std::ifstream myFile("config.txt");
 	if (myFile.is_open())
 	{
 		myFile >> rows;
+		myFile >> separador; //para coger el char de ';' (separa ambos números)
 		myFile >> columns;
+		myFile >> separador;
 
 		cTablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
 
@@ -111,6 +115,10 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 			if (player1.positionY > columns-1)
 			{
 				player1.positionY = 0;
+				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				{
+					player1.positionY = columns-1;
+				}
 			}
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move)? player1.updateScore(1): player1.updateScore(0);
@@ -129,7 +137,11 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		{
 			if (player1.positionY < 0)
 			{
-				player1.positionY = columns;
+				player1.positionY = columns-1;
+				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				{
+					player1.positionY = 0;
+				}
 			}
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
@@ -145,9 +157,16 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		break;
 	case Movement::UP:
 		player1.positionX--;
-		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)//NOS DA UN ERROR ......
 		{
-		
+			if (player1.positionX < 0)
+			{
+				player1.positionX = rows - 1;
+				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				{
+					player1.positionX = 0;
+				}
+			}
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
@@ -164,6 +183,14 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		player1.positionX++;
 		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
 		{
+			if (player1.positionX > rows-1)
+			{
+				player1.positionX = 0;
+				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				{
+					player1.positionX = rows-1;
+				}
+			}
 			player1.setPos(player1.positionX, player1.positionY);
 			existCoin(player1, move) ? player1.updateScore(1) : player1.updateScore(0);
 			return true;
