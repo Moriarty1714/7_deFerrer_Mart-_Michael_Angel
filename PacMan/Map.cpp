@@ -256,19 +256,22 @@ void Map::gameState(GameStates _gameState)
 {
 	if (_gameState == GameStates::INIT)
 	{
-		std::cout << "*-*- INIT -*-*";
+		std::cout << "*-*- INIT -*-*" << '\n';
+		std::cout << "Press SPACE to start";
 	}
 	else if (_gameState == GameStates::PLAY)
 	{
-		std::cout << "*-*- PLAY -*-*";
-
+		std::cout << "*-*- PLAY -*-*" << '\n';
+		std::cout << "Press P to pause";
 	}
 	else if (_gameState == GameStates::PAUSE)
 	{
-		std::cout << "*-*- PAUSE -*-*";
+		std::cout << "*-*- PAUSE -*-*" << '\n';
+		std::cout << "Press P to restore";
 	}
 	else if (_gameState == GameStates::GAMEOVER)
 	{
-		std::cout << "*-*- GAMEOVER -*-*";
+		std::cout << "*-*- GAMEOVER -*-*" << '\n';
+		std::cout << "YOU LOSE";
 	}
 }
