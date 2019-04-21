@@ -23,5 +23,5 @@ struct Map
 	bool existCoin(player &player1, Movement move); //FUNCIÓN PARA VERIFICAR SI EL SIGUIENTE MOVIMIENTO ES UNA MONEDA
 	void setPlayer(player &player1);
 	void movePlayer(player & player1, Movement newmovement); //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
-
+	void gameState(GameStates _gameState); //FUNCIÓN PARA TENER EL CONTROL DE LOS ESTDOS DEL JUEGO
 };

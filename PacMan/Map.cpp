@@ -252,4 +252,23 @@ void Map::movePlayer(player &player1, Movement newmovement) //FUNCIÓN PARA MOVER
 	
 }
 
+void Map::gameState(GameStates _gameState)
+{
+	if (_gameState == GameStates::INIT)
+	{
+		std::cout << "*-*- INIT -*-*";
+	}
+	else if (_gameState == GameStates::PLAY)
+	{
+		std::cout << "*-*- PLAY -*-*";
 
+	}
+	else if (_gameState == GameStates::PAUSE)
+	{
+		std::cout << "*-*- PAUSE -*-*";
+	}
+	else if (_gameState == GameStates::GAMEOVER)
+	{
+		std::cout << "*-*- GAMEOVER -*-*";
+	}
+}
