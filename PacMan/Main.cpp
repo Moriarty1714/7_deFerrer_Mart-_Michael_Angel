@@ -14,14 +14,41 @@ int main()
 	
 	Movement move = Movement::NOTHING; //Inicialmente estamos quietos
 	GameStates gameState = GameStates::INIT; //Inicialmente se encuentra en estado inicial
-	
+
+
+#pragma region MANERA COMO DEBE HACERSE EL MAIN!!! CAMBIARLO A ESTA MANERA
+	//mirar pdf especificacions del projecte!!! Estructura del projecte - controls!
+
+	//INIT GAME VARIABLES
+	//.....
+	//bool keyboard[(int)InputKey::COUNT] - {};
+
+	//while (!keyboard[(int)InputKey::K_ESC])
+	//{
+	//	//INPUT HANDLE
+	//	keyboard[(int)InputKey::K_ESC] = GetAsyncKeyState(VK_ESCAPE);
+	//	keyboard[(int)InputKey::K_UP] = GetAsyncKeyState(VK_UP);
+	//	keyboard[(int)InputKey::K_DOWN] = GetAsyncKeyState(VK_DOWN);
+	//	keyboard[(int)InputKey::K_RIGHT] = GetAsyncKeyState(VK_RIGHT);
+	//	keyboard[(int)InputKey::K_LEFT] = GetAsyncKeyState(VK_LEFT);
+
+	//	//UPDATE
+	//	//....
+
+	//	//DRAW
+	//	//.....
+
+	//	//FRAME CONTROL
+	//	//....
+	//}
+	//return 0;
+#pragma endregion
+
 	//INPUT OPCI�N GETASYNCKEYSTATE (COMO LA PRACTICA AA2)
 	do {
-
-		while (gameState == GameStates::PLAY)
+		system("cls"); //Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
+		if (gameState == GameStates::PLAY)
 		{
-			system("cls");//Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
-
 			if (GetAsyncKeyState('D') || GetAsyncKeyState(VK_RIGHT)) //Tecla D y (FLECHA DERECHA TECLADO) mueve el personaje a la derecha
 			{
 				move = Movement::RIGHT;
@@ -47,24 +74,9 @@ int main()
 			{
 				exit(0);
 			}
-
-			//LÓGICA DEL JUEGO
-			board.movePlayer(player, move);
-
-			//DRAW
-			player.printScore();
-			board.gameState(gameState);
-			board.mostrarTablero();
-
-
-			//CONTROLADOR DE FRAMES
-			Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
 		}
-
-		while (gameState == GameStates::PAUSE)
+		else if (gameState == GameStates::PAUSE)
 		{
-			system("cls");//Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
-
 			if (GetAsyncKeyState('P') || GetAsyncKeyState('p')) //TECLA P para poder RENAUDAR el juego
 			{
 				move = Movement::NOTHING;
@@ -74,24 +86,10 @@ int main()
 			{
 				exit(0);
 			}
-
-			//LÓGICA DEL JUEGO
-			board.movePlayer(player, move);
-
-			//DRAW
-			player.printScore();
-			board.gameState(gameState);
-			board.mostrarTablero();
-
-
-			//CONTROLADOR DE FRAMES
-			Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
 		}
 
-		while (gameState == GameStates::INIT)
+		else if (gameState == GameStates::INIT)
 		{
-			system("cls");//Ens permet imprimir en el mateix lloc  que l'anterior (netejar la pantalla)
-
 			if (GetAsyncKeyState(VK_SPACE)) //TECLA P para poder RENAUDAR el juego
 			{
 				move = Movement::NOTHING;
@@ -101,6 +99,7 @@ int main()
 			{
 				exit(0);
 			}
+		}
 
 			//LÓGICA DEL JUEGO
 			board.movePlayer(player, move);
@@ -113,7 +112,7 @@ int main()
 
 			//CONTROLADOR DE FRAMES
 			Sleep(400); //Espera cada 0.4 seg a tornar a fer el següent codi
-		}
+
 
 	} while (true);
 
