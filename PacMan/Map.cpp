@@ -25,22 +25,19 @@ Map::Map()
 
 		cTablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
 
+		tablero = new Cell * [rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio en el "board" principal
+
 		for (int i = 0; i <= rows; i++)
 		{
 			cTablero[i] = new char[columns]; //Rservando memoria para cada Columna
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
 			myFile.getline(cTablero[i], columns + 1);
+
+			tablero[i] = new Cell[columns];  //Rservando memoria para cada Columna
 		}
 		myFile.close();
 
-		//Convertir los chars en Cell
-		tablero = new Cell *[rows];
-		for (int i = 0; i <= rows; i++)
-		{
-			tablero[i] = new Cell[columns]; //Rservando memoria para cada Columna
-		}
-
-
+		//Convertir los chars en tipo Cell
 		for (int i = 0; i <= rows; i++)
 		{
 			for (int j = 0; j <= columns; j++)
@@ -58,8 +55,23 @@ Map::Map()
 					tablero[i][j] = Cell::PLAYER;
 					break;
 				}
-				default:
-				{
+				case '#': {
+					tablero[i][j] = Cell::BLINKY;
+					break;
+				}
+				case '&': {
+					tablero[i][j] = Cell::INKY;
+					break;
+				}
+				case '$': {
+					tablero[i][j] = Cell::CLYDE;
+					break;
+				}
+				case '0': {
+					tablero[i][j] = Cell::POWERUP;
+					break;
+				}
+				default:{
 					tablero[i][j] = Cell::NOTHING;
 					break;
 				}
