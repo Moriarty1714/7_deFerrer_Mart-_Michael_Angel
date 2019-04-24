@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Map.h"
 #include "Player.h"
+#include "Enemies.h"
 #include <Windows.h>
 
 Map::Map()
@@ -11,7 +12,7 @@ Map::Map()
 
 	char character;
 
-	char **cTablero; //Creo una array dinàmica para guardar el char
+	char **cBoard; //Creo una array dinàmica para guardar el char
 
 	char separador;
 
@@ -23,17 +24,17 @@ Map::Map()
 		myFile >> columns;
 		myFile >> separador;
 
-		cTablero = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
+		cBoard = new char*[rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio
 
-		tablero = new Cell * [rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio en el "board" principal
+		board = new Cell * [rows]; //Reservando memoria para cada Fila y cada una de las filas apuntara (variable puntero) a su vez a un sitio en el "board" principal
 
 		for (int i = 0; i <= rows; i++)
 		{
-			cTablero[i] = new char[columns]; //Rservando memoria para cada Columna
+			cBoard[i] = new char[columns]; //Rservando memoria para cada Columna
 			//la Fila tiene puntero porque apunta hacia las columnas (no tienen puntero)
-			myFile.getline(cTablero[i], columns + 1);
+			myFile.getline(cBoard[i], columns + 1);
 
-			tablero[i] = new Cell[columns];  //Rservando memoria para cada Columna
+			board[i] = new Cell[columns];  //Rservando memoria para cada Columna
 		}
 		myFile.close();
 
@@ -42,37 +43,37 @@ Map::Map()
 		{
 			for (int j = 0; j <= columns; j++)
 			{
-				switch (cTablero[i][j]) {
+				switch (cBoard[i][j]) {
 				case 'X': {
-					tablero[i][j] = Cell::STONE;
+					board[i][j] = Cell::STONE;
 					break;
 				}
 				case '*': {
-					tablero[i][j] = Cell::COINS;
+					board[i][j] = Cell::COINS;
 					break;
 				}
 				case '<': {
-					tablero[i][j] = Cell::PLAYER;
+					board[i][j] = Cell::PLAYER;
 					break;
 				}
 				case '#': {
-					tablero[i][j] = Cell::BLINKY;
+					board[i][j] = Cell::BLINKY;
 					break;
 				}
 				case '&': {
-					tablero[i][j] = Cell::INKY;
+					board[i][j] = Cell::INKY;
 					break;
 				}
 				case '$': {
-					tablero[i][j] = Cell::CLYDE;
+					board[i][j] = Cell::CLYDE;
 					break;
 				}
 				case '0': {
-					tablero[i][j] = Cell::POWERUP;
+					board[i][j] = Cell::POWERUP;
 					break;
 				}
 				default:{
-					tablero[i][j] = Cell::NOTHING;
+					board[i][j] = Cell::NOTHING;
 					break;
 				}
 				}
@@ -91,25 +92,25 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			if (tablero[i][j]==Cell::STONE) {
+			if (board[i][j]==Cell::STONE) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 17); //Da color azul a las piedras
-				std::cout << (char)tablero[i][j];
+				std::cout << (char)board[i][j];
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //Volver al color estándar
 			}
-			else if (tablero[i][j] == Cell::PLAYER) {
+			else if (board[i][j] == Cell::PLAYER) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6); //Da color amarillo al jugador
-				std::cout << (char)tablero[i][j];
+				std::cout << (char)board[i][j];
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); //Volver al color estándar
 			}
 			else {
-				std::cout << (char)tablero[i][j];
+				std::cout << (char)board[i][j];
 			}
 
 			if (j == columns - 1)
 			{
 				std::cout << '\n';
 			}//Esto es lo mismo que decir con punteros
-			////el *(tablero+i) señala a la fila y le añadimos *(....+j) para que señale la columna
+			////el *(board+i) señala a la fila y le añadimos *(....+j) para que señale la columna
 		}
 	}
 }
@@ -117,17 +118,17 @@ void Map::mostrarTablero() //funcion para mostrar la matriz, a la que le pasamos
 
 bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
 {
-	tablero[player1.positionX][player1.positionY] = Cell::NOTHING;	//Convierte la casilla donde estava en nada
+	board[player1.positionX][player1.positionY] = Cell::NOTHING;	//Convierte la casilla donde estava en nada
 	switch (move)
 	{
 	case Movement::RIGHT:
 		player1.positionY++;
-		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		if (board[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			if (player1.positionY > columns-1)
 			{
 				player1.positionY = 0;
-				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				if (board[player1.positionX][player1.positionY] == Cell::STONE)
 				{
 					player1.positionY = columns-1;
 				}
@@ -139,18 +140,18 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		else
 		{
 			player1.positionY--;
-			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
+			board[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
 	case Movement::LEFT:
 		player1.positionY--;
-		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		if (board[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			if (player1.positionY < 0)
 			{
 				player1.positionY = columns-1;
-				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				if (board[player1.positionX][player1.positionY] == Cell::STONE)
 				{
 					player1.positionY = 0;
 				}
@@ -163,18 +164,18 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		{
 			player1.positionY++;
 			player1.setPos(player1.positionX, player1.positionY);
-			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
+			board[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
 	case Movement::UP:
 		player1.positionX--;
-		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)//NOS DA UN ERROR ......
+		if (board[player1.positionX][player1.positionY] != Cell::STONE)//NOS DA UN ERROR ......
 		{
 			if (player1.positionX < 0)
 			{
 				player1.positionX = rows - 1;
-				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				if (board[player1.positionX][player1.positionY] == Cell::STONE)
 				{
 					player1.positionX = 0;
 				}
@@ -187,18 +188,18 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		{
 			player1.positionX++;
 			player1.setPos(player1.positionX, player1.positionY);
-			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
+			board[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
 	case Movement::DOWN:
 		player1.positionX++;
-		if (tablero[player1.positionX][player1.positionY] != Cell::STONE)
+		if (board[player1.positionX][player1.positionY] != Cell::STONE)
 		{
 			if (player1.positionX > rows-1)
 			{
 				player1.positionX = 0;
-				if (tablero[player1.positionX][player1.positionY] == Cell::STONE)
+				if (board[player1.positionX][player1.positionY] == Cell::STONE)
 				{
 					player1.positionX = rows-1;
 				}
@@ -211,7 +212,7 @@ bool Map::checkMovement(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR
 		{
 			player1.positionX--;
 			player1.setPos(player1.positionX, player1.positionY);
-			tablero[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
+			board[player1.positionX][player1.positionY] = Cell::PLAYER; //Poner otra vez el player en la posicion que estava
 			return false;
 		}
 		break;
@@ -229,7 +230,7 @@ bool Map::existCoin(player &player1, Movement move) //FUNCIÓN PARA VERIFICAR SI 
 	case Movement::DOWN:
 	case Movement::LEFT:
 	case Movement::RIGHT:
-		if (tablero[player1.positionX][player1.positionY] == Cell::COINS)
+		if (board[player1.positionX][player1.positionY] == Cell::COINS)
 		{
 			return true;
 		}
@@ -247,7 +248,7 @@ void Map::setPlayer(player &player1)
 {
 	player1.positionX = 4; //DETERMINA POSICION INICIAL PLAYER
 	player1.positionY = 5;
-	tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+	board[player1.positionX][player1.positionY] = Cell::PLAYER;
 }
 
 
@@ -258,7 +259,7 @@ void Map::movePlayer(player &player1, Movement newmovement) //FUNCIÓN PARA MOVER
 	else {
 		if (checkMovement(player1, newmovement))
 		{
-			tablero[player1.positionX][player1.positionY] = Cell::PLAYER;
+			board[player1.positionX][player1.positionY] = Cell::PLAYER;
 		}
 	}
 	
@@ -285,5 +286,19 @@ void Map::gameState(GameStates _gameState)
 	{
 		std::cout << "*-*- GAMEOVER -*-*" << '\n';
 		std::cout << "YOU LOSE";
+	}
+}
+
+void Map::setEnemiesInky(Enemies &Inky, int _posXInky, int _posYInky) //Funcion para poner posicion inicial X e Y de INKY en enemies
+{
+	for (int i = 0; i <= rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			if (board[i][j] == Cell::INKY) {
+				Inky.setEnemies(i, j);
+				
+			}
+		}
 	}
 }

@@ -2,12 +2,13 @@
 #include <iostream>
 #include "Player.h"
 #include "Types.h"
+#include "Enemies.h"
 #include <ctime>
 
 
 struct Map
 {
-	Cell **tablero; // ---> PODRÍA SER ASÍ
+	Cell **board; // ---> PODRÍA SER ASÍ
 	 //dos punteros señalan a una matriz!
 	int rows;
 	int columns;
@@ -24,4 +25,6 @@ struct Map
 	void setPlayer(player &player1);
 	void movePlayer(player & player1, Movement newmovement); //FUNCIÓN PARA MOVER EL PERSONAJE EN EL TABLERO Y ESTE ESTAR REPRESENTADO
 	void gameState(GameStates _gameState); //FUNCIÓN PARA TENER EL CONTROL DE LOS ESTDOS DEL JUEGO
+
+	void setEnemiesInky(Enemies &Inky, int _posXInky, int _posYInky); //INICIA INKY de momento
 };
