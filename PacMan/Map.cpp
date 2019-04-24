@@ -265,6 +265,18 @@ void Map::movePlayer(player &player1, Movement newmovement) //FUNCIÓN PARA MOVER
 	
 }
 
+void Map::moveEnemy(Enemies& enemy, Movement _movement) {
+
+	if (_movement == Movement::NOTHING) {}
+
+	else {
+		if (checkEnemyMovement( enemy, _movement))
+		{
+			board[enemy.inky.posX][enemy.inky.posY] = Cell::INKY;
+		}
+	}
+}
+
 void Map::gameState(GameStates _gameState)
 {
 	if (_gameState == GameStates::INIT)
@@ -289,16 +301,121 @@ void Map::gameState(GameStates _gameState)
 	}
 }
 
-void Map::setEnemiesInky(Enemies &Inky, int _posXInky, int _posYInky) //Funcion para poner posicion inicial X e Y de INKY en enemies
+void Map::setEnemiesInky(Enemies &Inky) //Funcion para poner posicion inicial X e Y de INKY en enemies
 {
 	for (int i = 0; i <= rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
 			if (board[i][j] == Cell::INKY) {
-				Inky.setEnemies(i, j);
+				Inky.setPosEnemies(i, j);
 				
 			}
 		}
+	}
+}
+
+bool Map::checkEnemyMovement( Enemies &_enemy, Movement move) //FUNCIÓN PARA VERIFICAR QUE SEA POSIBLE EL MOVIMIENTO DEL JUGADOR Y LO REALICE
+{ 
+	board[_enemy.inky.posX][_enemy.inky.posY] = Cell::COINS; //Los enemigos no interactuan ni con otros enemigos ni con los puntos ARRREGLAR
+
+	switch (move)
+	{
+	case Movement::RIGHT:
+		_enemy.inky.posY++;
+		if (board[_enemy.inky.posX][_enemy.inky.posY] != Cell::STONE)
+		{
+			if (_enemy.inky.posY > columns - 1)
+			{
+				_enemy.inky.posY = 0;
+				if (board[_enemy.inky.posX][_enemy.inky.posY] == Cell::STONE)
+				{
+					_enemy.inky.posY = columns - 1;
+				}
+			}
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			return true;
+		}
+		else
+		{
+			_enemy.inky.posY--;
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			board[_enemy.inky.posX][_enemy.inky.posY] = Cell::INKY; //Poner otra vez el enemie en la posicion que estava
+			return false;
+		}
+		break;
+
+
+	case Movement::LEFT:
+		_enemy.inky.posY--;
+		if (board[_enemy.inky.posX][_enemy.inky.posY] != Cell::STONE)
+		{
+			if (_enemy.inky.posY < 0 )
+			{
+				_enemy.inky.posY = columns - 1;
+				if (board[_enemy.inky.posX][_enemy.inky.posY] == Cell::STONE)
+				{
+					_enemy.inky.posY = 0;
+				}
+			}
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			return true;
+		}
+		else
+		{
+			_enemy.inky.posY++;
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			board[_enemy.inky.posX][_enemy.inky.posY] = Cell::INKY; //Poner otra vez el enemie en la posicion que estava
+			return false;
+		}
+		break;
+
+	case Movement::UP:
+		_enemy.inky.posX--;
+		if (board[_enemy.inky.posX][_enemy.inky.posY] != Cell::STONE)
+		{
+			if (_enemy.inky.posX < 0)
+			{
+				_enemy.inky.posX = rows - 1;
+				if (board[_enemy.inky.posX][_enemy.inky.posY] == Cell::STONE)
+				{
+					_enemy.inky.posX = 0;
+				}
+			}
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			return true;
+		}
+		else
+		{
+			_enemy.inky.posX++;
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			board[_enemy.inky.posX][_enemy.inky.posY] = Cell::INKY; //Poner otra vez el enemie en la posicion que estava
+			return false;
+		}
+		break;
+	case Movement::DOWN:
+		_enemy.inky.posX++;
+		if (board[_enemy.inky.posX][_enemy.inky.posY] != Cell::STONE)
+		{
+			if (_enemy.inky.posX > rows - 1)
+			{
+				_enemy.inky.posX = 0;
+				if (board[_enemy.inky.posX][_enemy.inky.posY] == Cell::STONE)
+				{
+					_enemy.inky.posX = rows - 1;
+				}
+			}
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			return true;
+		}
+		else
+		{
+			_enemy.inky.posX--;
+			_enemy.setPosEnemies(_enemy.inky.posX, _enemy.inky.posY);
+			board[_enemy.inky.posX][_enemy.inky.posY] = Cell::INKY; //Poner otra vez el enemie en la posicion que estava
+			return false;
+		}
+	default:
+		return false;
 	}
 }

@@ -8,9 +8,8 @@
 Enemies::Enemies () {
 }
 
-void Enemies::setEnemies(int _posXInky, int _posYInky)
-{
-	posXInky = _posXInky;
-	posYInky = _posYInky;
+void Enemies::setPosEnemies(int _posX, int _posY){
+	inky.posX = _posX;
+	inky.posY = _posY;
 }
 

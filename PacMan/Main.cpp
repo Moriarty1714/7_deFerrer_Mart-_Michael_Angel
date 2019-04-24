@@ -10,8 +10,11 @@ int main()
 	Map board;
 	player player;
 
+	Enemies inky;
+
 	board.setPlayer(player);
-	
+	board.setEnemiesInky(inky);
+
 	Movement move = Movement::NOTHING; //Inicialmente estamos quietos
 	GameStates gameState = GameStates::INIT; //Inicialmente se encuentra en estado inicial
 
@@ -103,7 +106,7 @@ int main()
 
 			//LÓGICA DEL JUEGO
 			board.movePlayer(player, move);
-
+			board.moveEnemy(inky, move);
 			//DRAW
 			player.printScore();
 			board.gameState(gameState);
